@@ -8,11 +8,46 @@ class BinarySearchTree
   end
 
   def search(value)
-    # your code here
+   return nil if @root.nil?
+   current = @root
+   found = false
+
+   while current && !found
+    if current.value > value
+      current = current.left  
+    elsif current.value < value
+      current = current.right
+    else
+      found = true
+    end
+   end
+   found ? current : nil
   end
 
   def insert(value)
-    # your code here
+    new_node = Node.new(value)
+    if @root.nil?
+      @root = new_node
+      return @root
+    end
+
+    current = @root
+    while current
+      return nil if value == current.value
+      if value < current.value
+        if current.left.nil?
+          current.left = new_node
+          return current.left
+        end
+        current = current.left
+      else
+        if current.right.nil?
+          current.right = new_node
+          return current.right
+        end
+        current = current.right
+      end
+    end
   end
 
 end 
